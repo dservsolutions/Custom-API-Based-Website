@@ -2,7 +2,7 @@ import os
 import requests
 from dotenv import load_dotenv
 from datetime import date
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 
 today = date.today()
@@ -18,16 +18,17 @@ endpoint = f"https://newsapi.org/v2/top-headlines?"
 parameters = {"country": "us",
               "apiKey": {api_key}
               }
+
+
 response = requests.get(endpoint, params=parameters)
 data = response.json()
 
 @app.route('/', methods = ["GET", "POST"])
 def get_news():
     articles = data['articles']
-    top_news = articles[0]
     return render_template('index.html',
-                           article = articles,
-                           top_news=top_news)
+                           article = articles)
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)

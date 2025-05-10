@@ -10,7 +10,7 @@
   <ul style="list-style-type: none;">
     {% for articles in article %}
     <li>
-    <a href=" {{ articles['url'] }}">
+    <a href="{{ articles['url']}}">
     {{ articles['title'] }}</a>
     {% endfor %}
     </li>
